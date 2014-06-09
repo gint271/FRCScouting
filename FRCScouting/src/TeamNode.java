@@ -3,12 +3,10 @@ import java.util.LinkedList;
 
 public class TeamNode 
 {
-	int number;
 	LinkedList <String> tagList = new LinkedList <String>();
 	
-	public TeamNode(int passNumber)
+	public TeamNode()
 	{
-		this.number = passNumber;
 	}
 	
 	public void addTag(String newTag)
