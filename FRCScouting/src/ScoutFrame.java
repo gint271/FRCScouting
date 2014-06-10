@@ -88,9 +88,9 @@ public class ScoutFrame extends JFrame {
 		contentPane.add(teamNumberField);
 		teamNumberField.setColumns(10);
 		
-		JLabel lblTeam = new JLabel("Team #");
-		lblTeam.setBounds(19, 14, 46, 14);
-		contentPane.add(lblTeam);
+//		lblTeam = new JLabel("Team #");
+//		lblTeam.setBounds(19, 14, 46, 14);
+//		contentPane.add(lblTeam);
 		
 		addTagField = new JTextField();
 		addTagField.setEditable(false);
@@ -164,7 +164,6 @@ public class ScoutFrame extends JFrame {
 		{
 			public void keyTyped(KeyEvent arg0) 
 			{
-				Iterator conductor = teamHash.entrySet().iterator();
 				
 				if(arg0.getKeyChar() == '\n')
 				{
@@ -172,13 +171,6 @@ public class ScoutFrame extends JFrame {
 					
 					tagsListField.setText("Teams with desired tag: \n");
 					
-//					while (conductor.hasNext())
-//					{
-//						if(((TeamNode) conductor.next()).contains(searchField.getText()))
-//						{
-//							
-//						}
-//					}
 					
 					for(Entry<Integer, TeamNode> entry : teamHash.entrySet()){
 					    System.out.printf("Key : %s and Value: %s %n", entry.getKey(), entry.getValue());
@@ -190,6 +182,14 @@ public class ScoutFrame extends JFrame {
 					}
 					
 					searchField.setText("");
+					
+					addTagField.setEditable(false);
+					tagsListField.setEditable(false);
+					btnAddLoss.setEnabled(false);
+					btnAddWin.setEnabled(false);
+					
+					teamStatsLabel.setText("Team Stats: X/X");
+					lblTeam.setText("Editing Team: XXXX");
 				}
 			}
 		});
@@ -197,4 +197,5 @@ public class ScoutFrame extends JFrame {
 		contentPane.add(searchField);
 		searchField.setColumns(10);
 	}
+	
 }
