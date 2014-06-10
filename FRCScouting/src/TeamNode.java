@@ -67,4 +67,10 @@ public class TeamNode
 	{
 		return losses;
 	}
+	
+	public Boolean contains(String tag)
+	{
+		return tagList.contains(tag);
+		
+	}
 }

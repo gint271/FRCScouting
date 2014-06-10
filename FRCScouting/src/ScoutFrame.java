@@ -10,8 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 public class ScoutFrame extends JFrame {
@@ -160,9 +164,32 @@ public class ScoutFrame extends JFrame {
 		{
 			public void keyTyped(KeyEvent arg0) 
 			{
+				Iterator conductor = teamHash.entrySet().iterator();
+				
 				if(arg0.getKeyChar() == '\n')
 				{
 					
+					
+					tagsListField.setText("Teams with desired tag: \n");
+					
+//					while (conductor.hasNext())
+//					{
+//						if(((TeamNode) conductor.next()).contains(searchField.getText()))
+//						{
+//							
+//						}
+//					}
+					
+					for(Entry<Integer, TeamNode> entry : teamHash.entrySet()){
+					    System.out.printf("Key : %s and Value: %s %n", entry.getKey(), entry.getValue());
+					    
+					    if(entry.getValue().contains(searchField.getText()))
+					    {
+					    	tagsListField.setText(tagsListField.getText() + entry.getKey() + "\n");
+					    }
+					}
+					
+					searchField.setText("");
 				}
 			}
 		});
