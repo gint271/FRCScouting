@@ -3,6 +3,8 @@ import javax.swing.JTextArea;
 
 public class JTagsField extends JTextArea
 {
+	
+	
 	void writeTags(TeamNode selectedTeam)
 	{
 		selectedTeam.getReset();
