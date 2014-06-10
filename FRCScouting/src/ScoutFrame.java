@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -25,7 +26,8 @@ public class ScoutFrame extends JFrame {
 	private JTextField addTagField;
 	private JLabel lblAddTag;
 	private int teamNumber;
-	private JTextField textField;
+	private TeamNode selectedTeam;
+	private JTagsField tagsListField;
 	
 	public ScoutFrame() 
 	{
@@ -66,6 +68,10 @@ public class ScoutFrame extends JFrame {
 					
 					lblTeam.setText("Editing Team: " + teamNumber);
 					addTagField.setEditable(true);
+					tagsListField.setEditable(true);
+					
+					selectedTeam = teamHash.get(teamNumber);
+					tagsListField.writeTags(selectedTeam);
 				}
 			}
 		});
@@ -82,12 +88,14 @@ public class ScoutFrame extends JFrame {
 		addTagField.addKeyListener(new KeyAdapter() 
 		{
 			public void keyTyped(KeyEvent arg0) 
-			{
+			{	
 				if(arg0.getKeyChar() == '\n')
 				{
-					teamHash.get(teamNumber).addTag(addTagField.getText());
+					selectedTeam.addTag(addTagField.getText());
 					
 					addTagField.setText("");
+					
+					tagsListField.writeTags(selectedTeam);
 				}
 			}
 		});
@@ -103,8 +111,9 @@ public class ScoutFrame extends JFrame {
 		scrollPane.setBounds(195, 73, 210, 178);
 		contentPane.add(scrollPane);
 		
-		textField = new JTextField();
-		scrollPane.setViewportView(textField);
-		textField.setColumns(10);
+		tagsListField = new JTagsField();
+		tagsListField.setEditable(false);
+		scrollPane.setViewportView(tagsListField);
+		tagsListField.setColumns(10);
 	}
 }
