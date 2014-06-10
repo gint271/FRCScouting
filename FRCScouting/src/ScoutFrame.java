@@ -1,6 +1,3 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,9 +5,6 @@ import javax.swing.JTextField;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -34,6 +28,8 @@ public class ScoutFrame extends JFrame {
 	private JStatsLabel teamStatsLabel;
 	private JButton btnAddWin;
 	private JButton btnAddLoss;
+	private JLabel lblNewLabel;
+	private JTextField searchField;
 	
 	public ScoutFrame() 
 	{
@@ -49,7 +45,7 @@ public class ScoutFrame extends JFrame {
 		
 		lblTeam = new JLabel("Editing Team: XXXX");
 		lblTeam.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTeam.setBounds(141, 42, 157, 33);
+		lblTeam.setBounds(141, 25, 157, 33);
 		contentPane.add(lblTeam);
 		
 		teamNumberField = new JTextField();
@@ -108,12 +104,12 @@ public class ScoutFrame extends JFrame {
 				}
 			}
 		});
-		addTagField.setBounds(251, 69, 86, 20);
+		addTagField.setBounds(212, 69, 86, 20);
 		contentPane.add(addTagField);
 		addTagField.setColumns(10);
 		
 		lblAddTag = new JLabel("Add Tag");
-		lblAddTag.setBounds(195, 72, 46, 14);
+		lblAddTag.setBounds(231, 52, 46, 14);
 		contentPane.add(lblAddTag);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -154,5 +150,24 @@ public class ScoutFrame extends JFrame {
 		});
 		btnAddLoss.setBounds(44, 144, 79, 20);
 		contentPane.add(btnAddLoss);
+		
+		lblNewLabel = new JLabel("Search Tag");
+		lblNewLabel.setBounds(321, 52, 62, 14);
+		contentPane.add(lblNewLabel);
+		
+		searchField = new JTextField();
+		searchField.addKeyListener(new KeyAdapter() 
+		{
+			public void keyTyped(KeyEvent arg0) 
+			{
+				if(arg0.getKeyChar() == '\n')
+				{
+					
+				}
+			}
+		});
+		searchField.setBounds(308, 69, 86, 20);
+		contentPane.add(searchField);
+		searchField.setColumns(10);
 	}
 }
