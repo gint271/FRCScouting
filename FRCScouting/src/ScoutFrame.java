@@ -15,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -22,6 +23,11 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map.Entry;
+
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 public class ScoutFrame extends JFrame {
@@ -49,6 +55,25 @@ public class ScoutFrame extends JFrame {
 		this.setTitle("Scouting Sheet");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				//TODO: Add code for popup.
+				private JOptionPane getSavePath;
+				
+				
+			}
+		});
+		mnFile.add(mntmSave);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,7 +120,7 @@ public class ScoutFrame extends JFrame {
 				}
 			}
 		});
-		teamNumberField.setBounds(75, 11, 86, 20);
+		teamNumberField.setBounds(78, 25, 86, 20);
 		contentPane.add(teamNumberField);
 		teamNumberField.setColumns(10);
 		
@@ -134,7 +159,8 @@ public class ScoutFrame extends JFrame {
 		tagsListField.setColumns(10);
 		
 		teamStatsLabel = new JStatsLabel("Team Stats: X/X");
-		teamStatsLabel.setBounds(44, 100, 96, 14);
+		teamStatsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		teamStatsLabel.setBounds(20, 100, 120, 14);
 		contentPane.add(teamStatsLabel);
 		
 		btnAddWin = new JButton("Add Win");
@@ -208,7 +234,7 @@ public class ScoutFrame extends JFrame {
 		searchField.setColumns(10);
 		
 		lblTeamNum = new JLabel("Team #");
-		lblTeamNum.setBounds(19, 14, 46, 14);
+		lblTeamNum.setBounds(22, 28, 46, 14);
 		contentPane.add(lblTeamNum);
 	}
 }
