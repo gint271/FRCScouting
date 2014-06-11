@@ -1,3 +1,11 @@
+/*
+ * Author: Ryan Milem
+ * 
+ * Date: 6/11/14
+ * 
+ * Purpose: This is the main window for the scouter.  It takes in and displays almost all data.
+ */
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -32,6 +40,7 @@ public class ScoutFrame extends JFrame {
 	private JButton btnAddLoss;
 	private JLabel lblNewLabel;
 	private JTextField searchField;
+	private JLabel lblTeamNum;
 	
 	public ScoutFrame() 
 	{
@@ -57,27 +66,31 @@ public class ScoutFrame extends JFrame {
 			{
 				if(arg0.getKeyChar() == '\n')
 				{
-					
-					
+					//TODO: Check to see if input is indeed a number.
 					teamNumber = Integer.parseInt(teamNumberField.getText());
 					teamNumberField.setText("");
 					
 					System.out.println("Team Number Entered. " + teamNumber);
 					
+					//If the entered number isn't stored, creates a new entry in hashmap.
 					if(!teamHash.containsKey(teamNumber))
 					{
 						teamHash.put(teamNumber, new TeamNode());
 						System.out.println("Made new node");
 					}
 					
+					//Updates lblTeam to display the selected number and makes all the fields for data entry editable.
 					lblTeam.setText("Editing Team: " + teamNumber);
 					addTagField.setEditable(true);
 					tagsListField.setEditable(true);
 					btnAddLoss.setEnabled(true);
 					btnAddWin.setEnabled(true);
 					
+					//Stores the selected TeamNode for future use.
 					selectedTeam = teamHash.get(teamNumber);
+					//Prints all tags associated with that team.
 					tagsListField.writeTags(selectedTeam);
+					//Reprints with selected teams win/loss ratio.
 					teamStatsLabel.update(selectedTeam.getWins(), selectedTeam.getLosses());
 				}
 			}
@@ -86,16 +99,13 @@ public class ScoutFrame extends JFrame {
 		contentPane.add(teamNumberField);
 		teamNumberField.setColumns(10);
 		
-//		lblTeam = new JLabel("Team #");
-//		lblTeam.setBounds(19, 14, 46, 14);
-//		contentPane.add(lblTeam);
-		
 		addTagField = new JTextField();
 		addTagField.setEditable(false);
 		addTagField.addKeyListener(new KeyAdapter() 
 		{
 			public void keyTyped(KeyEvent arg0) 
 			{	
+				//Takes entered tag, stores it in linked list, and updates the display.
 				if(arg0.getKeyChar() == '\n')
 				{
 					selectedTeam.addTag(addTagField.getText());
@@ -137,7 +147,7 @@ public class ScoutFrame extends JFrame {
 				teamStatsLabel.update(selectedTeam.getWins(), selectedTeam.getLosses());
 			}
 		});
-		btnAddWin.setBounds(44, 117, 79, 20);
+		btnAddWin.setBounds(20, 117, 120, 20);
 		contentPane.add(btnAddWin);
 		
 		btnAddLoss = new JButton("Add Loss");
@@ -150,11 +160,11 @@ public class ScoutFrame extends JFrame {
 				teamStatsLabel.update(selectedTeam.getWins(), selectedTeam.getLosses());
 			}
 		});
-		btnAddLoss.setBounds(44, 144, 79, 20);
+		btnAddLoss.setBounds(20, 144, 120, 20);
 		contentPane.add(btnAddLoss);
 		
 		lblNewLabel = new JLabel("Search Tag");
-		lblNewLabel.setBounds(321, 52, 62, 14);
+		lblNewLabel.setBounds(321, 52, 73, 14);
 		contentPane.add(lblNewLabel);
 		
 		searchField = new JTextField();
@@ -162,18 +172,19 @@ public class ScoutFrame extends JFrame {
 		{
 			public void keyTyped(KeyEvent arg0) 
 			{
+				String desiredTag;
 				
 				if(arg0.getKeyChar() == '\n')
 				{
+					desiredTag = searchField.getText();
 					
+					tagsListField.setText("Teams with " + desiredTag + "\n");
 					
-					tagsListField.setText("Teams with desired tag: \n");
-					
-					
+					//Iterates through hashmap and searches each linked list for tag.  If found, prints team's number.
 					for(Entry<Integer, TeamNode> entry : teamHash.entrySet()){
 					    System.out.printf("Key : %s and Value: %s %n", entry.getKey(), entry.getValue());
 					    
-					    if(entry.getValue().contains(searchField.getText()))
+					    if(entry.getValue().contains(desiredTag))
 					    {
 					    	tagsListField.setText(tagsListField.getText() + entry.getKey() + "\n");
 					    }
@@ -181,6 +192,7 @@ public class ScoutFrame extends JFrame {
 					
 					searchField.setText("");
 					
+					//No team is selected anymore, so sets all data entry to uneditable.
 					addTagField.setEditable(false);
 					tagsListField.setEditable(false);
 					btnAddLoss.setEnabled(false);
@@ -194,6 +206,9 @@ public class ScoutFrame extends JFrame {
 		searchField.setBounds(308, 69, 86, 20);
 		contentPane.add(searchField);
 		searchField.setColumns(10);
+		
+		lblTeamNum = new JLabel("Team #");
+		lblTeamNum.setBounds(19, 14, 46, 14);
+		contentPane.add(lblTeamNum);
 	}
-	
 }

@@ -1,3 +1,11 @@
+/*
+ * Author: Ryan Milem
+ * 
+ * Date: 6/11/14
+ * 
+ * Purpose: Stores the tags for a single team.
+ */
+
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -5,7 +13,7 @@ import java.util.ListIterator;
 public class TeamNode 
 {
 	private LinkedList <String> tagList = new LinkedList <String>();
-	private ListIterator <String> conducter;
+	private ListIterator <String> conducter = null;
 	private int wins, losses;
 	
 	public TeamNode()
@@ -40,7 +48,14 @@ public class TeamNode
 	
 	public Boolean hasNext()
 	{
-		return conducter.hasNext();
+		if(conducter != null)
+		{
+			return conducter.hasNext();
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public String getNext()

@@ -1,3 +1,11 @@
+/*
+ * Author: Ryan Milem
+ * 
+ * Date: 6/11/14
+ * 
+ * Purpose: Used to display a team's win/loss ratio.
+ */
+
 import javax.swing.JLabel;
 
 

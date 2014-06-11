@@ -1,3 +1,11 @@
+/*
+ * Author: Ryan Milem
+ * 
+ * Date: 6/11/14
+ * 
+ * Purpose: Display all tags associated with the selected team number.
+ */
+
 import javax.swing.JTextArea;
 
 
