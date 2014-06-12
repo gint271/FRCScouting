@@ -83,6 +83,16 @@ public class TeamNode
 		return losses;
 	}
 	
+	public void setWins(int passWins)
+	{
+		wins = passWins;
+	}
+	
+	public void setLosses(int passLosses)
+	{
+		losses = passLosses;
+	}
+	
 	public Boolean contains(String tag)
 	{
 		return tagList.contains(tag);

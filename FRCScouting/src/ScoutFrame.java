@@ -76,6 +76,21 @@ public class ScoutFrame extends JFrame {
 			}
 		});
 		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mntmLoad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				//TODO: Get mouseclicked event to work.
+				
+				System.out.println("User clicked 'Load'");
+				String path = JOptionPane.showInputDialog("Enter the path of the file to load.");
+				
+				System.out.println("Path is " + path);
+				teamHash.load(path);
+			}
+		});
+		mnFile.add(mntmLoad);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
