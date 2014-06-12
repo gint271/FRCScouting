@@ -54,7 +54,7 @@ public class ScoutFrame extends JFrame {
 		
 		this.setTitle("Scouting Sheet");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 316);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -65,12 +65,14 @@ public class ScoutFrame extends JFrame {
 		JMenuItem mntmSave = new JMenuItem("Save");
 		mntmSave.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) 
-			{
-				//TODO: Add code for popup.
-				private JOptionPane getSavePath;
+			public void mousePressed(MouseEvent arg0) {
+				//TODO: Get mouseclicked event to work.
 				
+				System.out.println("User clicked 'Save'");
+				String path = JOptionPane.showInputDialog("Enter the path of the save file.");
 				
+				System.out.println("Path is " + path);
+				teamHash.save(path);
 			}
 		});
 		mnFile.add(mntmSave);

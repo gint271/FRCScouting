@@ -18,11 +18,11 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 {
 	public void save(String path)
 	{
-		//TODO: Use JFileChooser for saving, rather than user input.
-		File saveFile = new File("F:\\teamNodeSave.txt");
+		File saveFile = new File(path);
 		BufferedWriter saveWriter;
 		try
 		{
+			//TODO: Handle closing saveWriter when quitting unexpectedly.
 			saveWriter = new BufferedWriter(new FileWriter(saveFile));
 		}
 		catch (Exception e)
@@ -31,10 +31,26 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 			return;
 		}
 		
-		for(java.util.Map.Entry<Integer, TeamNode> entry : this.entrySet()){
+		for(java.util.Map.Entry<Integer, TeamNode> entry : this.entrySet())
+		{
 		    System.out.printf("Key : %s and Value: %s %n", entry.getKey(), entry.getValue());
 		    
-		    
+		    try
+		    {
+		    	saveWriter.write(entry.getKey() + "\t" + entry.getValue().getWins() + "\t" + entry.getValue().getLosses());
+		    	
+		    	entry.getValue().getReset();
+		    	
+		    	while(entry.getValue().hasNext())
+		    	{
+		    		saveWriter.write("\t" + entry.getValue().getNext());
+		    	}
+		    }
+		    catch (Exception e)
+		    {
+		    	System.out.println("Failed to write to file.");
+		    	return;
+		    }
 		}
 		
 		try
@@ -47,4 +63,6 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 			return;
 		}
 	}
+	
+	
 }
