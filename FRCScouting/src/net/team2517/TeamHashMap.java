@@ -46,7 +46,11 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 				
 				//TODO: Add checking for if team is already loaded.  Will be helpful for combining files.
 				//Makes new entry in hash for team number.
-				this.put(Integer.parseInt(lineElements[0]), new TeamNode());
+				if(!this.containsKey(Integer.parseInt(lineElements[0])))
+				{
+					//Only makes new teamnode if team not already in memory.
+					this.put(Integer.parseInt(lineElements[0]), new TeamNode());
+				}
 				
 				//Stores wins and losses in entry.
 				this.get(Integer.parseInt(lineElements[0])).setWins(Integer.parseInt(lineElements[1]));
@@ -54,7 +58,11 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 				
 				for(i = 3; i < lineElements.length; i++)
 				{
-					this.get(Integer.parseInt(lineElements[0])).addTag(lineElements[i]);
+					//Checks if tag is already in memory.  Loads only if not.
+					if(!this.get(Integer.parseInt(lineElements[0])).contains(lineElements[i]))
+					{
+						this.get(Integer.parseInt(lineElements[0])).addTag(lineElements[i]);
+					}
 				}
 			}
 		}
