@@ -103,7 +103,7 @@ public class TeamHashMap extends HashMap <Integer, TeamNode>
 		    		saveWriter.write("\t" + entry.getValue().getNext());
 		    	}
 		    	
-		    	saveWriter.write("\n");
+		    	saveWriter.newLine();
 		    	
 		    	saveWriter.flush();
 		    }
